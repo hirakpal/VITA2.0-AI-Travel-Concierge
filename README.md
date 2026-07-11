@@ -1,5 +1,8 @@
 # VITA2.0-AI-Travel-Concierge
+"""
+# System Architecture Diagram
 
+```mermaid
 flowchart TD
     A[Streamlit Frontend (VITA UI)] --> B[Conversation Manager (LangGraph Entry)]
     B --> C[Shared Application State]
@@ -27,3 +30,4 @@ flowchart TD
     N --> O[Itinerary Builder Agent]
     O --> P[Travel DNA Memory Update]
     P --> Q[END]
+
