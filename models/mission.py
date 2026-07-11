@@ -14,6 +14,10 @@ class MissionStatus(str, Enum):
 
 
 class MissionEvent(BaseModel):
+    """
+    Event displayed in Mission Control.
+    """
+
     model_config = ConfigDict(
         validate_assignment=True,
         extra="forbid"
