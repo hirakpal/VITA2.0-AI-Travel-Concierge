@@ -1,33 +1,50 @@
 import streamlit as st
-from datetime import datetime
-
 
 def render_mission_control():
 
     st.subheader("🚀 Mission Control")
 
-    for log in reversed(st.session_state.mission_logs):
-
-        current_time = datetime.now().strftime("%H:%M:%S")
-
-        st.success(f"{current_time}  {log}")
-
     profile = st.session_state.profile
 
-    if not profile["destination"]:
+    # -------------------
+    # Current Stage
+    # -------------------
 
-        next_step = "Tell me where you'd like to travel."
+    if profile["completion"] < 100:
 
-    elif not profile["budget"]:
-
-        next_step = "What's your budget?"
-
-    elif not profile["duration"]:
-
-        next_step = "How many days are you planning?"
+        stage = "🟢 Discovery"
 
     else:
 
-        next_step = "Traveller profile is progressing well."
+        stage = "🟡 Recommendation"
 
-    st.info(f"### Next Step\n\n{next_step}")
+    st.info(f"### Current Stage\n\n{stage}")
+
+    # -------------------
+
+    st.write("### Activity")
+
+    for log in reversed(st.session_state.mission_logs):
+
+        st.success(log)
+
+    st.write("### Planning Progress")
+
+    steps = [
+        ("Discovery", profile["completion"] > 0),
+        ("Traveller Profile", profile["completion"] == 100),
+        ("Recommendations", False),
+        ("Trip Summary", False),
+        ("Itinerary", False),
+        ("Final Approval", False)
+    ]
+
+    for title, done in steps:
+
+        if done:
+
+            st.markdown(f"✅ {title}")
+
+        else:
+
+            st.markdown(f"⬜ {title}")
