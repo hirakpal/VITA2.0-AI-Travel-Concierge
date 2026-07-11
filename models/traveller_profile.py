@@ -7,6 +7,10 @@ class TravellerProfile(BaseModel):
     destination: Optional[str] = None
 
     origin: Optional[str] = None
+    
+    trip_name: str | None = None
+
+    trip_type: str | None = None
 
     travellers: Optional[str] = None
 
@@ -15,6 +19,10 @@ class TravellerProfile(BaseModel):
     children: int = 0
 
     infants: int = 0
+
+    companions: list[str] = Field(default_factory=list)
+    
+    constraints: list[str] = Field(default_factory=list)
 
     duration: Optional[int] = None
 
