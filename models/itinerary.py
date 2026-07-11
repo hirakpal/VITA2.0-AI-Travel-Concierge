@@ -10,6 +10,14 @@ class Activity(BaseModel):
 
     description: str
 
+    location: str = ""
+    
+    latitude: float | None = None
+    
+    longitude: float | None = None
+    
+    estimated_duration: int = 0
+
 
 class DayPlan(BaseModel):
 
