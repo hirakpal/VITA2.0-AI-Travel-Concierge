@@ -1,52 +1,29 @@
 import streamlit as st
-st.write("### Traveller Readiness")
+
 FIELDS = {
-
-"Destination":"destination",
-
-"Budget":"budget",
-
-"Duration":"duration",
-
-"Travellers":"travellers",
-
-"Travel Month":"travel_month",
-
-"Travel Style":"travel_style"
-
+    "Destination": "destination",
+    "Budget": "budget",
+    "Duration": "duration",
+    "Travellers": "travellers",
+    "Travel Month": "travel_month",
+    "Travel Style": "travel_style"
 }
 
-for label,key in FIELDS.items():
 
-    if profile[key]:
-
-        st.success(f"✅ {label}")
-
-    else:
-
-        st.warning(f"⚠ {label}")
-
-
-def completion(profile):
-
-    filled = 0
-
-    for field in FIELDS:
-
-        if profile[field]:
-
-            filled += 1
-
-    return int((filled / len(FIELDS)) * 100)
+def calculate_completion(profile):
+    total = len(FIELDS)
+    completed = sum(1 for key in FIELDS.values() if profile.get(key))
+    return int((completed / total) * 100)
 
 
 def render_workspace():
 
-    st.subheader("🧳 Traveller Workspace")
-
     profile = st.session_state.profile
 
-    profile["completion"] = completion(profile)
+    # Calculate profile completion
+    profile["completion"] = calculate_completion(profile)
+
+    st.subheader("🧳 Traveller Workspace")
 
     st.progress(profile["completion"] / 100)
 
@@ -55,26 +32,13 @@ def render_workspace():
         f"{profile['completion']}%"
     )
 
-    st.write("### 📍 Destination")
+    st.divider()
 
-    st.info(profile["destination"] or "Not selected")
+    st.write("### Traveller Readiness")
 
-    st.write("### 💰 Budget")
+    for label, key in FIELDS.items():
 
-    st.info(profile["budget"] or "Not provided")
-
-    st.write("### 👥 Travellers")
-
-    st.info(profile["travellers"] or "Unknown")
-
-    st.write("### 📅 Travel Month")
-
-    st.info(profile["travel_month"] or "Not selected")
-
-    st.write("### ⏳ Duration")
-
-    st.info(profile["duration"] or "Not selected")
-
-    st.write("### 🎯 Travel Style")
-
-    st.info(profile["travel_style"] or "Unknown")
+        if profile.get(key):
+            st.success(f"✅ {label}: {profile[key]}")
+        else:
+            st.warning(f"⚠ {label}: Pending")
