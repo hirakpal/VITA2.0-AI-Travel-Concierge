@@ -12,7 +12,9 @@ class RecommendationCard(BaseModel):
 
     description: str
 
-    estimated_cost: float
+    price: float
+
+    currency: str = "INR"
 
     rating: float
 
