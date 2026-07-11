@@ -1,1 +1,5 @@
-
+streamlit==1.47.0
+python-dotenv
+pydantic
+pandas
+plotly
