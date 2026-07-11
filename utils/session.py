@@ -11,6 +11,7 @@ def initialize_session():
             "budget": "",
             "duration": "",
             "travellers": "",
+            "travel_month": "",
             "travel_style": "",
             "completion": 0
         }
