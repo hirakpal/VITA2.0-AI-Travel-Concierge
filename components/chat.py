@@ -1,5 +1,6 @@
 import streamlit as st
 from services.profile_extractor import extract_profile
+from services.conversation_engine import get_next_question
 
 def render_chat():
 
@@ -29,10 +30,14 @@ def render_chat():
             "🧠 Traveller profile updated."
         )
 
+        reply, log = get_next_question(profile)
+
+        st.session_state.mission_logs.append(log)
+
         st.session_state.messages.append(
             {
                 "role":"assistant",
-                "content":"Great! I've updated your traveller profile."
+                "content":reply
             }
         )
 
