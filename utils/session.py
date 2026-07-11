@@ -7,13 +7,13 @@ def initialize_session():
 
     if "profile" not in st.session_state:
         st.session_state.profile = {
-            "destination": "",
-            "budget": "",
-            "duration": "",
-            "travellers": "",
-            "travel_month": "",
-            "travel_style": "",
-            "completion": 0
+            "destination":"",
+            "budget":"",
+            "duration":"",
+            "travellers":"",
+            "travel_month":"",
+            "travel_style":"",
+            "completion":0
         }
 
     if "mission_logs" not in st.session_state:
