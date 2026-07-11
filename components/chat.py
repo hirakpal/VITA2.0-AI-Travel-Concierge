@@ -1,4 +1,5 @@
 import streamlit as st
+from services.profile_extractor import extract_profile
 
 def render_chat():
 
@@ -12,15 +13,26 @@ def render_chat():
 
         st.session_state.messages.append(
             {
-                "role": "user",
-                "content": user_input
+                "role":"user",
+                "content":user_input
             }
+        )
+
+        profile = extract_profile(
+            user_input,
+            st.session_state.profile
+        )
+
+        st.session_state.profile = profile
+
+        st.session_state.mission_logs.append(
+            "🧠 Traveller profile updated."
         )
 
         st.session_state.messages.append(
             {
-                "role": "assistant",
-                "content": "👋 Hello! I'm VITA. Let's plan your next adventure together."
+                "role":"assistant",
+                "content":"Great! I've updated your traveller profile."
             }
         )
 
