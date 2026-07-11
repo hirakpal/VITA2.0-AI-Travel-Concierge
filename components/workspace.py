@@ -1,13 +1,30 @@
 import streamlit as st
+st.write("### Traveller Readiness")
+FIELDS = {
 
-FIELDS = [
-    "destination",
-    "budget",
-    "duration",
-    "travellers",
-    "travel_month",
-    "travel_style"
-]
+"Destination":"destination",
+
+"Budget":"budget",
+
+"Duration":"duration",
+
+"Travellers":"travellers",
+
+"Travel Month":"travel_month",
+
+"Travel Style":"travel_style"
+
+}
+
+for label,key in FIELDS.items():
+
+    if profile[key]:
+
+        st.success(f"✅ {label}")
+
+    else:
+
+        st.warning(f"⚠ {label}")
 
 
 def completion(profile):
